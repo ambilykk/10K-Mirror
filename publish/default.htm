@@ -1,0 +1,80 @@
+﻿<!DOCTYPE HTML>
+<HTML lang="en">
+<HEAD>
+    <TITLE>Shadow</TITLE>
+    <META charset="utf-8">
+    <META http-equiv="X-UA-Compatible" content="IE=edge">
+    <META name="viewport" content="width=device-width, initial-scale=1">    
+    <link href="Content/style.min.css" rel="stylesheet" />
+</HEAD>
+<BODY>
+    <HEADER class="sh" data-theme="light red/white">
+        <svg class="shadow">
+            <text x="20" y="120"
+                  style="fill: #fff; stroke: rgb(65, 85, 180);  font-size: 75px;">
+                Mirror
+            </text>
+        </svg>   
+        <div class="tooltip">
+            Mirror - I can identify you, read your emotions and analyze your message to understand your feeling or sentiment.
+        </div>
+    </HEADER>
+   
+    <main class="site home">
+
+        <DIV class="cog cogmain hi">
+            <DIV class="grid">
+                <DIV class="maincontent" id="flCard">
+                    <H1 class="mainheading">
+                        <SPAN data-anim-block=""><SPAN data-anim-element="">Who Are You?</SPAN></SPAN>
+                    </H1>
+                    <P>
+                        Look in the Mirror... That's your Competition
+                    </P>
+                    
+                    <input type="file" name="snap" id="snap" autofocus accept="image/*" capture />
+                    <div class="loader" id="loader"></div>
+                    <A data-button="variant" onclick="sharePhoto()">
+                        <SPAN class="buttontext">Identify Yourself</SPAN>
+                        <SPAN class="buttontext--hover">Identify Yourself</SPAN>
+                    </A>
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV class="fl flmain">
+            <DIV class="grid">
+                <DIV class="flcontent" id="flcontent">
+                    <H3 class="mainheading">My Reflections</H3>
+                    <P class="flheading" id="analyticsResult">
+                        You Look Nice Today
+                    </P>                   
+                </DIV>
+            </DIV>
+        </DIV>
+
+        <DIV class="fl snapdiv">
+            <DIV class="grid">
+                <DIV class="flcontent">
+                    <H3 class="flheading">Am I Wrong ?</H3>
+                    <P>
+                        Share your thoughts; I will Confirm.
+                    </P>                    
+                    <input type="text" id="feeling" />
+                    <div class="loader" id="loaderfl"></div>
+                    <A onclick="message()" data-button="">
+                        <SPAN class="buttontext"> Share Your Thoughts</SPAN>
+                        <SPAN class="buttontext--hover"> Share Your Thoughts</SPAN>
+                    </A>
+                    <h1>
+                        <SPAN data-anim-element="" id="sentimentResult">
+                        </SPAN>
+                    </h1>
+                </DIV>
+            </DIV>
+        </DIV>
+              
+    </main>
+    <script src="Content/main.min.js"></script>
+</BODY>
+</HTML>

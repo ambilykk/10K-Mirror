@@ -1,0 +1,93 @@
+﻿<!DOCTYPE HTML>
+<HTML lang="en">
+<HEAD>
+    <TITLE>Sample</TITLE>
+    <META charset="utf-8">
+    <META http-equiv="X-UA-Compatible" content="IE=edge">
+    <META name="viewport" content="width=device-width, initial-scale=1">    
+    <link href="Content/style.css" rel="stylesheet" />
+</HEAD>
+<BODY>
+    <HEADER class="site-header" data-theme="light red/white">
+        <svg class="shadow">
+            <text x="20" y="120"
+                  style="fill: #fff; stroke: rgb(65, 85, 180);  font-size: 80px;">
+                Shadow
+            </text>
+        </svg>
+
+    </HEADER>
+    <UL class="page-nav">
+        <LI class="page-nav__item" data-dot-nav="1"></LI>
+        <LI class="page-nav__item" data-dot-nav="2"></LI>
+        <LI class="page-nav__item" data-dot-nav="3"></LI>
+        <LI class="page-nav__item" data-dot-nav="4"></LI>
+    </UL>
+    <main class="site home">
+        <DIV class="hero hero--canvas home-intro home-frame">
+            <DIV class="grid">
+                <DIV class="hero__content" id="feelingCard">
+                    <H1 class="hero__heading">
+                        <SPAN data-anim-block=""><SPAN data-anim-element="">How you Feel Today?</SPAN></SPAN>
+                    </H1>                 
+                    <input type="text" id="feeling" autofocus  />
+                    <A data-button="variant" onclick="message()">
+                        <SPAN class="button__text">Share Your Thoughts</SPAN>
+                        <SPAN class="button__text--hover"> Share Your Thoughts</SPAN>
+                    </A>
+
+                    <H2 class="hero__heading">
+                        <SPAN data-anim-block=""><SPAN data-anim-element="" id="analyticsResult"></SPAN></SPAN>
+                    </H2>
+
+                </DIV>
+            </DIV>
+        </DIV>
+        <DIV class="cs-promo cs-promo--pets home-frame">
+            <DIV class="grid">
+                <DIV class="cs-promo__content">
+                    <H3 class="cs-promo__heading">Let me see how you looks today</H3>
+                    <P>
+                        Upload your snap or capture your snap through the Camera.             
+                        </P>                   
+                    <input type="file"  name="uploader" id="uploader" accept="image/*" capture /> 
+                <A  onclick="shareSnap()"
+                           data-button="" >
+                        <SPAN class="button__text">
+                           Show Me Your Snap
+                        </SPAN>     <SPAN class="button__text--hover"> Show Me Your Snap</SPAN>
+                    </A>
+
+                    <h1>
+                        <SPAN data-anim-element="" id="snapResult">
+                            </SPAN>
+                    </h1>
+                </DIV>
+            </DIV>
+        </DIV>
+        <DIV class="cs-promo cs-promo--brewery home-frame">
+            <DIV class="grid">
+                <DIV class="cs-promo__content">
+                    <H3 class="cs-promo__heading">Identify</H3>
+                    <P>
+                        I am your shadow; I can identify you.        
+                    </P>
+                    <input type="file" name="snap" id="snap" accept="image/*" capture /> 
+                <A onClick="sharePhoto()"
+                           data-button="">
+                        <SPAN class="button__text">Identify Yourself</SPAN>     
+                    <SPAN class="button__text--hover">Identify Yourself</SPAN>
+                    </A>
+                    <h1>
+                        <SPAN data-anim-element="" id="identityResult">
+                        </SPAN>
+                    </h1>
+                </DIV>          
+              
+            </DIV>
+        </DIV>
+      
+    </main>
+    <script src="Content/main.js"></script>
+</BODY>
+</HTML>

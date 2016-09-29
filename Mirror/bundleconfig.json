@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "Content/style.min.css",
+    "inputFiles": [
+      "Content/style.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/main.min.js",
+    "inputFiles": [
+      "Content/main.js"
+    ]
+  }
+]
