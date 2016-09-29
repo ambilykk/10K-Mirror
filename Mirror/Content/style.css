@@ -25,7 +25,7 @@ main {
     display: block;
 }
 
-.shadow {
+.Mirror {
     height:20vh !important;
     -webkit-filter: drop-shadow( -5px -5px 5px #000 );
     filter: drop-shadow( -5px -5px 5px #000 );

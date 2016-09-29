@@ -13,13 +13,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Shadow.Controllers
+namespace Mirror.Controllers
 {
     public class ImageHelper
     {
         static string textSubscriptionKey = "23bf8fa933b04bcfac457c2299499c15";
         static string emotionSubscriptionKey = "7f3fe88d5e424a22855caa1472625c0e";
         static string visionSubscriptionKey = "ada889d064b04f42ad12f1b5c6ee6e6b";
+              
 
         public static async Task<string> GetSentiments(string message)
         {
@@ -67,48 +68,52 @@ namespace Shadow.Controllers
 
             try
             {
-                FileStream stream = new FileStream(fileName, FileMode.Open);
-                VisionServiceClient VisionServiceClient = new VisionServiceClient(visionSubscriptionKey);
-                VisualFeature[] visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Description, VisualFeature.Faces };
-                AnalysisResult analyzeresult = await VisionServiceClient.AnalyzeImageAsync(stream, visualFeatures);
-                stream.Close();
-
-                if (analyzeresult.Faces.Count() == 0)
+                AnalysisResult analyzeresult = null;
+                using (FileStream stream = new FileStream(fileName, FileMode.Open))
                 {
-                    result = "Oh!  This doesn't look like your photo. I think the snap is  " + analyzeresult.Description.Captions.First().Text;
-                    return result;
+                    VisionServiceClient VisionServiceClient = new VisionServiceClient(visionSubscriptionKey);
+                    VisualFeature[] visualFeatures = new VisualFeature[] { VisualFeature.Adult, VisualFeature.Description, VisualFeature.Faces };
+                    analyzeresult = await VisionServiceClient.AnalyzeImageAsync(stream, visualFeatures);
                 }
-                else if (analyzeresult.Faces.Count() == 1)
-                {
-                    result = "You are a " + analyzeresult.Faces.First().Gender + " with approximately " + analyzeresult.Faces.First().Age + " years old. ";                   
 
-                    EmotionServiceClient emotionServiceClient = new EmotionServiceClient(emotionSubscriptionKey);
-                    FileStream fileStream = new FileStream(fileName, FileMode.Open);
-                    Emotion[] emotionResult = await emotionServiceClient.RecognizeAsync(fileStream);
-                    if (emotionResult.Count() > 0)
+                if (analyzeresult != null)
+                {
+                    if (analyzeresult.Faces.Count() == 0)
                     {
-                        var scores = emotionResult.First().Scores;
-                        result += " You looks so " + GetEmotion(scores) + "  today.";
+                        result = "Oh!  This doesn't look like your photo. I think the snap is  " + analyzeresult.Description.Captions.First().Text;
                     }
-                    fileStream.Close();
-
-                    return result;
-                }
-                else
-                {
-                    result = "How can I identify you from the group of  " + analyzeresult.Faces.Count() + " people?  ";
-                    if (analyzeresult.Faces.Count(p => p.Gender == "Male") > 0)
-                        result += " You have " + analyzeresult.Faces.Count(p => p.Gender == "Male") + " Male ";
-                    if (analyzeresult.Faces.Count(p => p.Gender == "Female") > 0)
+                    else if (analyzeresult.Faces.Count() == 1)
                     {
+                        result = "You are a " + analyzeresult.Faces.First().Gender + " with approximately " + analyzeresult.Faces.First().Age + " years old. ";
+
+                        EmotionServiceClient emotionServiceClient = new EmotionServiceClient(emotionSubscriptionKey);
+                        FileStream fileStream = new FileStream(fileName, FileMode.Open);
+                        Emotion[] emotionResult = await emotionServiceClient.RecognizeAsync(fileStream);
+                        if (emotionResult.Count() > 0)
+                        {
+                            var scores = emotionResult.First().Scores;
+                            result += " You looks so " + GetEmotion(scores) + "  today.";
+                        }
+                        fileStream.Close();
+                    }
+                    else
+                    {
+                        result = "How can I identify you from the group of  " + analyzeresult.Faces.Count() + " people?  ";
                         if (analyzeresult.Faces.Count(p => p.Gender == "Male") > 0)
-                            result += " and ";
-                        result += analyzeresult.Faces.Count(p => p.Gender == "Female") + " Female ";
+                            result += " You have " + analyzeresult.Faces.Count(p => p.Gender == "Male") + " Male ";
+                        if (analyzeresult.Faces.Count(p => p.Gender == "Female") > 0)
+                        {
+                            if (analyzeresult.Faces.Count(p => p.Gender == "Male") > 0)
+                                result += " and ";
+                            result += analyzeresult.Faces.Count(p => p.Gender == "Female") + " Female ";
+                        }
+                        result += " friends in the snap. Share only your snap.";
+                       
                     }
-                    result+= " friends in the snap. Share only your snap."; 
-                    return result;
                 }
-            }catch(Exception ex)
+                return result;
+            }
+            catch(Exception ex)
             {
                 return ex.Message;
             }
