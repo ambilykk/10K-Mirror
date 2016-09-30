@@ -34,3 +34,4 @@ D:\Ambily\projects\Mirror\Mirror\bin\System.Web.Http.WebHost.xml
 D:\Ambily\projects\Mirror\Mirror\obj\Release\Mirror.csproj.App.config
 D:\Ambily\projects\Mirror\Mirror\obj\Release\Mirror.dll
 D:\Ambily\projects\Mirror\Mirror\obj\Release\Mirror.pdb
+D:\Ambily\projects\Mirror\Mirror\obj\Release\Mirror.csprojResolveAssemblyReference.cache
